@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Reader</string>
+    <string name="btn_original_source">ZDROJ</string>
+    <string name="favorite">FAVORITE</string>
+    <string name="res_Novinky">NOVINKY</string>
+    <string name="res_Ulozene">ULOŽENÉ</string>
+    <string name="res_favorite">OBĽÚBENÉ</string>
+    <string name="res_delete">VYMAZAŤ</string>
+    <string name="toast_deleted">Príspevok bol vymazaný</string>
+    <string name="toast_saved">Príspevok bol uložený</string>
+    <string name="noInternetConnection">Žiadny prístup na internet</string>
+</resources>
