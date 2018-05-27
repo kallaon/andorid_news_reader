@@ -6,7 +6,11 @@ import android.util.Log;
 import com.example.danieljezik.reader.Database.DataBaseHelper;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Article {
 
@@ -104,7 +108,17 @@ public class Article {
     }
 
     public String getPublishedAt() {
-        return publishedAt;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy 'o' HH:mm");
+            Date d = dateFormat.parse(publishedAt);
+            String output = df.format(d);
+            return output;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return e.toString();
+        }
     }
 
     public void setPublishedAt(String publishedAt) {
