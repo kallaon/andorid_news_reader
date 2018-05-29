@@ -7,6 +7,11 @@ import retrofit2.http.GET;
 
 public interface EndpointInterface {
 
+    /**
+     * Interface, ktorý definuje cestu k api + API kľúč
+     *
+     * @return vracia Response z Callu na URL
+     */
     @GET("/v2/top-headlines?country=sk&apiKey=e7059dbbd36e40679cea1fa606b58c5b")
     Call<NewsResponse> getNewsData();
 }

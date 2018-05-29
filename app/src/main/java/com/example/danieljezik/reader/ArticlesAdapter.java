@@ -22,11 +22,25 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
     private List<Article> articlesList;
     private RecyclerViewClickListener recyclerViewClickListener;
 
+    /**
+     * Konštuktor pre ArticlesAdapter
+     *
+     * @param articlesList arraylist článkov
+     * @param recyclerViewClickListener recyclerViewClickListener
+     */
     public ArticlesAdapter(List<Article> articlesList, RecyclerViewClickListener recyclerViewClickListener) {
         this.articlesList = articlesList;
         this.recyclerViewClickListener = recyclerViewClickListener;
     }
 
+    /**
+     * Vytvorenie MyViewHolder
+     *
+     * @param parent parent
+     * @param viewType viewType
+     *
+     * @return vracia MyViewHolder
+     */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -35,6 +49,13 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
         return new MyViewHolder(itemView, recyclerViewClickListener);
     }
 
+    /**
+     * Na základe pozície nastavuje texty a obrázky článkom
+     * Priraďuje náhladové obrázky, ak nieje dostupný vloží defaultný
+     *
+     * @param holder holder
+     * @param position pozícia
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Article article = articlesList.get(position);
@@ -47,15 +68,20 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
         } else {
             Glide.with(holder.context).load(R.mipmap.ic_launcher_round).apply(RequestOptions.circleCropTransform()).into(holder.imageView_article);
         }
-
     }
 
-
+    /**
+     * Metóda vracia počet článkov
+     * @return počet článkov
+     */
     @Override
     public int getItemCount() {
         return articlesList.size();
     }
 
+    /**
+     * Inicializácia TextView, ImageView, Context, RecyclerViewClickListener
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView title, source, publishedAt;
         private ImageView imageView_article;
@@ -74,6 +100,11 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
             view.setOnClickListener(this);
         }
 
+        /**
+         * Vracia pozíciu kliknutia
+         *
+         * @param view view
+         */
         @Override
         public void onClick(View view) {
             mListener.onClick(view, getAdapterPosition());

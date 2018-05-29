@@ -35,6 +35,17 @@ public class Article {
     @SerializedName("publishedAt")
     private String publishedAt;
 
+    /**
+     * Konštruktor pre vytvorenie článku, napĺňaný pomocou "@SerializedName"
+     *
+     * @param source zdroj článku
+     * @param author autor článku
+     * @param title nadpis článku
+     * @param description popis článku
+     * @param url url článku
+     * @param urlToImage URL obrázku článku
+     * @param publishedAt dátum vytvorenia článku
+     */
     public Article(Source source, String author, String title, String description, String url, String urlToImage, String publishedAt) {
         this.source = source;
         this.author = author;
@@ -45,6 +56,11 @@ public class Article {
         this.publishedAt = publishedAt;
     }
 
+    /**
+     * Vytváranie článku z databázy
+     *
+     * @param cursor cursor
+     */
     public Article(Cursor cursor)
     {
         String sourceName = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COL_SOURCE_NAME));
@@ -58,6 +74,8 @@ public class Article {
         this.urlToImage = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COL_URL_TO_IMAGE));
         this.publishedAt = cursor.getString(cursor.getColumnIndex(DataBaseHelper.COL_PUBLISHEDAT));
     }
+
+
 
     public Source getSource() {
         return source;
@@ -108,17 +126,7 @@ public class Article {
     }
 
     public String getPublishedAt() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        try {
-            SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy 'o' HH:mm");
-            Date d = dateFormat.parse(publishedAt);
-            String output = df.format(d);
-            return output;
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return e.toString();
-        }
+        return publishedAt;
     }
 
     public void setPublishedAt(String publishedAt) {

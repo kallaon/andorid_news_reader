@@ -12,6 +12,13 @@ public class NewsResponse {
     @SerializedName("articles")
     private List<Article> articles;
 
+    /**
+     * Konštuktor pre Response z API
+     *
+     * @param status status odpovede zo servera
+     * @param totalResults počet výsledkov
+     * @param articles články
+     */
     public NewsResponse(String status, int totalResults, List<Article> articles) {
         this.status = status;
         this.totalResults = totalResults;

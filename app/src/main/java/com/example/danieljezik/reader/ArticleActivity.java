@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.danieljezik.reader.Database.DataBaseHelper;
 
+import java.text.ParseException;
+
 public class ArticleActivity extends AppCompatActivity {
 
     private DataBaseHelper database;
@@ -30,6 +32,9 @@ public class ArticleActivity extends AppCompatActivity {
     private String author;
     private String status;
 
+    /**
+     * Metóda nastavuje texty buttonov na základe toho, či je článok uložený alebo nie
+     */
     private void setButtonValues()
     {
         database = new DataBaseHelper(getBaseContext());
@@ -39,15 +44,19 @@ public class ArticleActivity extends AppCompatActivity {
         } else {
             favoriteButton.setText(getString(R.string.res_favorite));
         }
-
     }
 
+    /**
+     * Hlavná metóda aktivity Článku, po kliknutí zobrazuje dané texty,popisy, obrázky pre článok
+     * Nastavuje buttony pre uloženie článku a zobrazenie originálneho článku
+     * Nastavuje toasty, ktoré informujú o vymazaní a pridaní článku
+     *
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
-
-
         getIntentContent();
 
         sourceButton = (Button) findViewById(R.id.btn_original_source);
@@ -60,8 +69,6 @@ public class ArticleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
 
         favoriteButton = (Button) findViewById(R.id.btn_favorite);
         setButtonValues();
@@ -86,20 +93,23 @@ public class ArticleActivity extends AppCompatActivity {
                     database.close();
                 }
             }
-
         });
-
     }
 
+    /**
+     * V metóde onResume je volaná metóda setButtonValues, pomocou ktorej sa prípadne upravia texty buttonov
+     */
     @Override
     protected void onResume() {
         super.onResume();
         setButtonValues();
     }
 
+    /**
+     * Metóda nastavuje premenné hodnotami poslanými v Intente
+     */
     private void getIntentContent()
     {
-
         imageUrl = getIntent().getStringExtra("header_image");
         publishedAt = getIntent().getStringExtra("date");
         title = getIntent().getStringExtra("title");
@@ -109,11 +119,18 @@ public class ArticleActivity extends AppCompatActivity {
         author = getIntent().getStringExtra("author");
         status = getIntent().getStringExtra("status");
 
-        //Log.d("vypis",publishedAt);
-
         setTexts(title,description,source,publishedAt,imageUrl);
     }
 
+    /**
+     * Metóda napĺňa elementy textami a obrázkami
+     *
+     * @param title nadpis článku
+     * @param description popis článku
+     * @param source zdroj článku
+     * @param publishedAt dátum publikovania článku
+     * @param imageUrl URL obrázku
+     */
     private void setTexts(String title, String description, String source, String publishedAt, String imageUrl)
     {
         TextView source_name = findViewById(R.id.source_name);
@@ -129,10 +146,17 @@ public class ArticleActivity extends AppCompatActivity {
         article_publishedAt.setText(publishedAt);
 
         ImageView header_image = findViewById(R.id.header_image);
-        Glide.with(this)
-                .asBitmap()
-                .load(imageUrl)
-                .into(header_image);
+        if (imageUrl != null){
+            Glide.with(this)
+                    .asBitmap()
+                    .load(imageUrl)
+                    .into(header_image);
+        } else {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(R.drawable.ic_launcher_background)
+                    .into(header_image);
+        }
 
     }
 }

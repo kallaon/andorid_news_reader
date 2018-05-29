@@ -12,6 +12,12 @@ public class ApiClient {
     private static final String BASE_URL = "http://newsapi.org";
     private static Retrofit retrofit = null;
 
+    /**
+     * Vytváranie klienta Retrofit, pre vytváranie requestov
+     * Obsahuje BASE_URL, URL na ktorú sa bude napájať
+     *
+     * @return objekt typu Retrofit
+     */
     public static Retrofit getClient() {
 
         if (retrofit == null)
@@ -19,7 +25,6 @@ public class ApiClient {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)

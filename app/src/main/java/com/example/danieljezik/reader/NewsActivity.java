@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.example.danieljezik.reader.Database.DataBaseHelper;
@@ -14,11 +15,16 @@ import com.example.danieljezik.reader.Retrofit.ApiClient;
 import com.example.danieljezik.reader.Retrofit.EndpointInterface;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class NewsActivity extends AppCompatActivity  implements RecyclerViewClickListener {
 
@@ -57,7 +63,13 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 NewsResponse nr = response.body();
+                //response.headers().get("x-cached-result").equals("false")
                 articleList = nr.getArticles();
+                for (Article article: articleList)
+                {
+                    article.setPublishedAt(toDate(article.getPublishedAt()));
+                }
+
                 //articlesAdapter = new ArticlesAdapter(nr.getArticles(),);
                 articlesAdapter = new ArticlesAdapter(articleList, recyclerViewClickListener);
                 recyclerView.setAdapter(articlesAdapter);
@@ -96,5 +108,28 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
         startActivity(intent);
     }
 
+    /**
+     * Metóda formátujem dátom článkov na user friendly formát
+     *
+     * @param publishedAt dátum publikovania článku
+     *
+     * @return naformátovaný dátum
+     */
+    private String toDate(String publishedAt)
+    {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy 'o' HH:mm");
+            Date d = dateFormat.parse(publishedAt);
+            String output = df.format(d);
+            return output;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return e.toString();
+        }
+
+    }
 
 }

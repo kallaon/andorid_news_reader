@@ -20,6 +20,11 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
     private RecyclerViewClickListener recyclerViewClickListener;
     private DataBaseHelper database;
 
+    /**
+     * Metóda, ktorá napĺňa recyclerView pre uložené články
+     *
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,9 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
 
     }
 
+    /**
+     * Metóda onResume sťahuje všetky články uložené v databáze a posiela ich do recyclerView
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -41,6 +49,12 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
         recyclerView.setAdapter(articlesAdapter);
     }
 
+    /**
+     * Metóda vytvára intent a napĺňa ho informáciami o článku
+     *
+     * @param view view
+     * @param position pozícia
+     */
     @Override
     public void onClick(View view, int position) {
         Intent intent = new Intent(this, ArticleActivity.class);

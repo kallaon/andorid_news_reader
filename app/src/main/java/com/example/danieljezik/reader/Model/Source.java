@@ -9,6 +9,12 @@ public class Source {
     @SerializedName("name")
     private String name;
 
+    /**
+     * Konštuktor tela Article, source má viac parametrov
+     *
+     * @param id id zdroja
+     * @param name meno zdroja
+     */
     public Source(String id, String name) {
         this.id = id;
         this.name = name;
