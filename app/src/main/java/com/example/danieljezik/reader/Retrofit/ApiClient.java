@@ -1,8 +1,5 @@
 package com.example.danieljezik.reader.Retrofit;
 
-import java.io.File;
-
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -13,8 +10,8 @@ public class ApiClient {
     private static Retrofit retrofit = null;
 
     /**
-     * Vytváranie klienta Retrofit, pre vytváranie requestov
-     * Obsahuje BASE_URL, URL na ktorú sa bude napájať
+     * Vytvaranie klienta Retrofit, pre vytvaranie requestov
+     * Obsahuje BASE_URL, URL na ktoru sa bude napajat
      *
      * @return objekt typu Retrofit
      */

@@ -21,7 +21,7 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
     private DataBaseHelper database;
 
     /**
-     * Metóda, ktorá napĺňa recyclerView pre uložené články
+     * Metoda, ktora naplna recyclerView pre ulozene clanky
      *
      * @param savedInstanceState savedInstanceState
      */
@@ -39,7 +39,7 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
     }
 
     /**
-     * Metóda onResume sťahuje všetky články uložené v databáze a posiela ich do recyclerView
+     * Metoda onResume stahuje vsetky clanky ulozene v databaze a posiela ich do recyclerView
      */
     @Override
     protected void onResume() {
@@ -50,7 +50,7 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
     }
 
     /**
-     * Metóda vytvára intent a napĺňa ho informáciami o článku
+     * Metoda vytvara intent a naplna ho informaciami o clanku
      *
      * @param view view
      * @param position pozícia

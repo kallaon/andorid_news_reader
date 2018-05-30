@@ -4,9 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.danieljezik.reader.Model.Article;
 
@@ -14,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "article.db";
-    public static final String TABLE_NAME = "article_table";
+    private static final String DATABASE_NAME = "article.db";
+    private static final String TABLE_NAME = "article_table";
 
     public static final String COL_ARTICLE_ID = "ARTICLE_ID";
     public static final String COL_SOURCE_NAME = "SOURCE_NAME";
@@ -27,7 +25,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COL_PUBLISHEDAT = "PUBLISHEDAT";
 
     //vytvorenie DB tabulky
-    public static final String DB_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
+    private static final String DB_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
             "ARTICLE_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "SOURCE_NAME TEXT," +
             "AUTHOR TEXT," +
@@ -133,11 +131,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Metóda, ktorá zisťuje, či sa článok nachádza v databáze resp. či je uložený
+     * Metoda, ktora zistuje, ci sa clanok nachadza v databaze resp. ci je ulozeny
      *
-     * @param url vyhľadávanie článku pomocou URL
+     * @param url vyhladavanie clanku pomocou URL
      *
-     * @return boolean hodnota úspechu vyhľadania
+     * @return boolean hodnota uspechu vyhladania
      */
     public boolean ifArticleIsSaved(String url)
     {
@@ -156,9 +154,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Metóda vracia všetky články, ktoré sa nachádzajú v databáze
+     * Metoda vracia vsetky clanky, ktore sa nachadzaju v databaze
      *
-     * @return arraylist článkov
+     * @return arraylist clankov
      */
     public List<Article> getAllArticles()
     {

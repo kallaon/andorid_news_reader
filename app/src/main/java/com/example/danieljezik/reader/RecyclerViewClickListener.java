@@ -4,7 +4,7 @@ import android.view.View;
 
 public interface RecyclerViewClickListener {
     /**
-     * Interface na zistenie pozície kliknutia
+     * Interface na zistenie pozicie kliknutia
      *
      * @param view view
      * @param position pozícia

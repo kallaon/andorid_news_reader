@@ -1,16 +1,9 @@
 package com.example.danieljezik.reader.Model;
 
 import android.database.Cursor;
-import android.util.Log;
 
 import com.example.danieljezik.reader.Database.DataBaseHelper;
 import com.google.gson.annotations.SerializedName;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class Article {
 
@@ -36,15 +29,15 @@ public class Article {
     private String publishedAt;
 
     /**
-     * Konštruktor pre vytvorenie článku, napĺňaný pomocou "@SerializedName"
+     * Konstruktor pre vytvorenie clanku, naplnany pomocou "@SerializedName"
      *
-     * @param source zdroj článku
-     * @param author autor článku
-     * @param title nadpis článku
-     * @param description popis článku
-     * @param url url článku
-     * @param urlToImage URL obrázku článku
-     * @param publishedAt dátum vytvorenia článku
+     * @param source zdroj clanku
+     * @param author autor clanku
+     * @param title nadpis clanku
+     * @param description popis clanku
+     * @param url url clanku
+     * @param urlToImage URL obrazku clanku
+     * @param publishedAt datum vytvorenia clanku
      */
     public Article(Source source, String author, String title, String description, String url, String urlToImage, String publishedAt) {
         this.source = source;
@@ -57,7 +50,7 @@ public class Article {
     }
 
     /**
-     * Vytváranie článku z databázy
+     * Vytvaranie clanku z databázy
      *
      * @param cursor cursor
      */

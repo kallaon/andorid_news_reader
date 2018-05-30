@@ -13,11 +13,11 @@ public class NewsResponse {
     private List<Article> articles;
 
     /**
-     * Konštuktor pre Response z API
+     * Konstuktor pre Response z API
      *
      * @param status status odpovede zo servera
-     * @param totalResults počet výsledkov
-     * @param articles články
+     * @param totalResults pocet vysledkov
+     * @param articles clanky
      */
     public NewsResponse(String status, int totalResults, List<Article> articles) {
         this.status = status;

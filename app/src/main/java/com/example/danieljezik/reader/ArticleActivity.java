@@ -1,13 +1,10 @@
 package com.example.danieljezik.reader;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,8 +12,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.danieljezik.reader.Database.DataBaseHelper;
-
-import java.text.ParseException;
 
 public class ArticleActivity extends AppCompatActivity {
 
@@ -33,7 +28,7 @@ public class ArticleActivity extends AppCompatActivity {
     private String status;
 
     /**
-     * Metóda nastavuje texty buttonov na základe toho, či je článok uložený alebo nie
+     * Metoda nastavuje texty buttonov na základe toho, ci je clanok ulozeny alebo nie
      */
     private void setButtonValues()
     {
@@ -47,9 +42,9 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     /**
-     * Hlavná metóda aktivity Článku, po kliknutí zobrazuje dané texty,popisy, obrázky pre článok
-     * Nastavuje buttony pre uloženie článku a zobrazenie originálneho článku
-     * Nastavuje toasty, ktoré informujú o vymazaní a pridaní článku
+     * Hlavna metoda aktivity Clanku, po kliknuti zobrazuje dane texty,popisy, obrazky pre članok
+     * Nastavuje buttony pre ulozenie clanku a zobrazenie originalneho clanku
+     * Nastavuje toasty, ktore informuju o vymazani a pridani clanku
      *
      * @param savedInstanceState savedInstanceState
      */
@@ -77,6 +72,7 @@ public class ArticleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // zobrazuje toasty a maze alebo pridava do databazy
                 if (database.ifArticleIsSaved(url))
                 {
                     database.removeArticle(url);
@@ -97,7 +93,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     /**
-     * V metóde onResume je volaná metóda setButtonValues, pomocou ktorej sa prípadne upravia texty buttonov
+     * V metode onResume je volana metoda setButtonValues, pomocou ktorej sa pripadne upravia texty buttonov
      */
     @Override
     protected void onResume() {
@@ -106,7 +102,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     /**
-     * Metóda nastavuje premenné hodnotami poslanými v Intente
+     * Metoda nastavuje premenne hodnotami poslanymi v Intente
      */
     private void getIntentContent()
     {
@@ -123,13 +119,13 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     /**
-     * Metóda napĺňa elementy textami a obrázkami
+     * Metoda naplna elementy textami a obrazkami
      *
-     * @param title nadpis článku
-     * @param description popis článku
-     * @param source zdroj článku
-     * @param publishedAt dátum publikovania článku
-     * @param imageUrl URL obrázku
+     * @param title nadpis clánku
+     * @param description popis clanku
+     * @param source zdroj clanku
+     * @param publishedAt datum publikovania clanku
+     * @param imageUrl URL obrazku
      */
     private void setTexts(String title, String description, String source, String publishedAt, String imageUrl)
     {

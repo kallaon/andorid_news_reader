@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 public interface EndpointInterface {
 
     /**
-     * Interface, ktorý definuje cestu k api + API kľúč
+     * Interface, ktory definuje cestu k api + API kluc
      *
      * @return vracia Response z Callu na URL
      */

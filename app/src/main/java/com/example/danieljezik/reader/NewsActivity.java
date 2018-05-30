@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.example.danieljezik.reader.Database.DataBaseHelper;
@@ -14,13 +13,11 @@ import com.example.danieljezik.reader.Model.NewsResponse;
 import com.example.danieljezik.reader.Retrofit.ApiClient;
 import com.example.danieljezik.reader.Retrofit.EndpointInterface;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,9 +32,9 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
     private DataBaseHelper database;
 
     /**
-     * Metóda onCreate, inicializuje prvky pri vytvorení a všetky potrebné veci
+     * Metoda onCreate, inicializuje prvky pri vytvoreni a vsetky potrebne veci
      *
-     * @param savedInstanceState
+     * @param savedInstanceState savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +50,10 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
         EndpointInterface apiInterface = ApiClient.getClient().create(EndpointInterface.class);
 
         /**
-         * Metóda vykoná asynchrónny call, z tela responsu získa dáta, ktoré spracuje na články a napĺňa nimi recyclerView
+         * Metoda vykona asynchronny call, z tela responsu ziska data, ktore spracuje na clanky a naplna nimi recyclerView
          *
          * @param call objekt volania call
-         * @param response odpoveď (response)
+         * @param response odpoved (response)
          */
         Call<NewsResponse> newsResponse = apiInterface.getNewsData();
         newsResponse.enqueue(new Callback<NewsResponse>() {
@@ -76,10 +73,10 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
             }
 
             /**
-             * Metóda pre chybu
+             * Metoda pre chybu
              *
              * @param call volanie
-             * @param t výnimka
+             * @param t vynimka
              */
             @Override
             public void onFailure(Call<NewsResponse> call, Throwable t) {
@@ -89,10 +86,10 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
     }
 
     /**
-     * Metóda na zíklade kliknutia zistí pozíciu prvku, vytvorí intent, do ktorého vloží informácie o danom článku a vyvolá novú aktivitu
+     * Metoda na zaklade kliknutia zistí poziciu prvku, vytvori intent, do ktoreho vlozi informacie o danom clanku a vyvola novu aktivitu
      *
-     *  @param view view
-     * @param position pozícia prvku
+     * @param view view
+     * @param position pozicia prvku
      */
     @Override
     public void onClick(View view, int position) {
@@ -109,11 +106,11 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
     }
 
     /**
-     * Metóda formátujem dátom článkov na user friendly formát
+     * Metoda formatujem datum clankov na user friendly format
      *
-     * @param publishedAt dátum publikovania článku
+     * @param publishedAt datum publikovania clanku
      *
-     * @return naformátovaný dátum
+     * @return naformatovaný datum
      */
     private String toDate(String publishedAt)
     {

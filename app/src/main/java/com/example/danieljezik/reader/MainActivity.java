@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnUlozene;
 
     /**
-     * Metóda onCreate volaná pri vytvorení aplikácie, nastavuje potrebné parametre aplikácie
-     * Podľa dostupnosti internetu nastavuje buttony a logiku
+     * Metoda onCreate volana pri vytvorení aplikacie, nastavuje potrebne parametre aplikacie
+     * Podla dostupnosti internetu nastavuje buttony a logiku
      *
      * @param savedInstanceState savedInstanceState
      */
@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Metóda volaná pri obnovení, nastavuje potrebné parametre aplikácie
-     * Podľa dostupnosti internetu nastavuje buttony a logiku
+     * Metoda volana pri obnoveni, nastavuje potrebne parametre aplikacie
+     * Podla dostupnosti internetu nastavuje buttony a logiku
      */
     @Override
     protected void onResume() {
@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Metóda nastavuje dostupnosť buttonov, zobrazuje toasty, je využívaná onCreate a onResume
-     * Po kliknutí na button - obľúbené, presmeruje na offline články
-     * Po kliknutí na button - novinky, presmeruje na zoznam noviniek
+     * Metoda nastavuje dostupnost buttonov, zobrazuje toasty, je vyuzivana onCreate a onResume
+     * Po kliknuti na button - oblubene, presmeruje na offline clanky
+     * Po kliknuti na button - novinky, presmeruje na zoznam noviniek
      *
-     * @param isNetworkAvailable výsledok z metódy isNetworkAvailable
+     * @param isNetworkAvailable vysledok z metody isNetworkAvailable
      */
     private void initSettings(boolean isNetworkAvailable){
         btnNovinky = findViewById(R.id.btn_novinky);
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Metóda zisťuje dostupnosť internetu cez dáta a WiFi
+     * Metoda zistuje dostupnost internetu cez data a WiFi
      *
      * @return vracia boolean hodnotu dostupnosti internetu
      */

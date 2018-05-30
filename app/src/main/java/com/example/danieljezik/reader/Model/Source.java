@@ -10,7 +10,7 @@ public class Source {
     private String name;
 
     /**
-     * Konštuktor tela Article, source má viac parametrov
+     * Konstuktor tela Article, source ma viac parametrov
      *
      * @param id id zdroja
      * @param name meno zdroja

@@ -1,10 +1,7 @@
 package com.example.danieljezik.reader;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Movie;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +20,9 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
     private RecyclerViewClickListener recyclerViewClickListener;
 
     /**
-     * Konštuktor pre ArticlesAdapter
+     * Konstuktor pre ArticlesAdapter
      *
-     * @param articlesList arraylist článkov
+     * @param articlesList arraylist clankov
      * @param recyclerViewClickListener recyclerViewClickListener
      */
     public ArticlesAdapter(List<Article> articlesList, RecyclerViewClickListener recyclerViewClickListener) {
@@ -50,11 +47,11 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
     }
 
     /**
-     * Na základe pozície nastavuje texty a obrázky článkom
-     * Priraďuje náhladové obrázky, ak nieje dostupný vloží defaultný
+     * Na zaklade pozicie nastavuje texty a obrazky clankom
+     * Priraduje nahladove obrazky, ak nieje dostupny vlozi defaultny
      *
      * @param holder holder
-     * @param position pozícia
+     * @param position pozicia
      */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
@@ -71,8 +68,8 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
     }
 
     /**
-     * Metóda vracia počet článkov
-     * @return počet článkov
+     * Metoda vracia pocet clankov
+     * @return pocet clankov
      */
     @Override
     public int getItemCount() {
@@ -80,13 +77,13 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
     }
 
     /**
-     * Inicializácia TextView, ImageView, Context, RecyclerViewClickListener
+     * Inicializacia TextView, ImageView, Context, RecyclerViewClickListener
      */
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView title, source, publishedAt;
+        private TextView title, source, publishedAt;
         private ImageView imageView_article;
         private Context context;
-        public RecyclerViewClickListener mListener;
+        private RecyclerViewClickListener mListener;
 
 
         public MyViewHolder(View view, RecyclerViewClickListener listener) {
@@ -101,7 +98,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.MyView
         }
 
         /**
-         * Vracia pozíciu kliknutia
+         * Vracia poziciu kliknutia
          *
          * @param view view
          */
