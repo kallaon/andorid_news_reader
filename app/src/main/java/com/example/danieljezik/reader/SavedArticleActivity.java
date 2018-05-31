@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.danieljezik.reader.Database.DataBaseHelper;
 import com.example.danieljezik.reader.Model.Article;
@@ -20,6 +21,8 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
     private RecyclerViewClickListener recyclerViewClickListener;
     private DataBaseHelper database;
 
+    private TextView tvNoDbItems;
+
     /**
      * Metoda, ktora naplna recyclerView pre ulozene clanky
      *
@@ -32,6 +35,8 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
 
         database = new DataBaseHelper(this);
         recyclerViewClickListener = this;
+
+        tvNoDbItems = (TextView) findViewById(R.id.tvNoDbItems);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -47,6 +52,11 @@ public class SavedArticleActivity extends AppCompatActivity implements RecyclerV
         articleList = database.getAllArticles();
         articlesAdapter = new ArticlesAdapter(articleList, recyclerViewClickListener);
         recyclerView.setAdapter(articlesAdapter);
+
+        if (articleList.size() < 1) {
+            tvNoDbItems.setVisibility(View.VISIBLE);
+        }
+
     }
 
     /**

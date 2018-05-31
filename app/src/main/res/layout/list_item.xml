@@ -8,23 +8,42 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/imageView_article_prev"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:id="@+id/wrapper">
+
+        <ImageView
+            android:id="@+id/imageView_article_prev"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/imageView_article_prev"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/source_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/title"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/wrapper"
         android:paddingLeft="15dp"
         android:textSize="16sp" />
 
@@ -34,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/title"
+        android:layout_below="@id/wrapper"
         android:paddingBottom="8dp"
         android:paddingRight="7dp"
         android:textSize="16sp" />
@@ -46,16 +65,7 @@
         android:layout_alignParentStart="true"
         android:background="#aeaeae" />
 
-    <ImageView
-        android:id="@+id/imageView_article_prev"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+
 
 
 </RelativeLayout>

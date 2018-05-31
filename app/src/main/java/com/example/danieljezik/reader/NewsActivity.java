@@ -1,13 +1,15 @@
 package com.example.danieljezik.reader;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.example.danieljezik.reader.Database.DataBaseHelper;
+import android.widget.TextView;
 import com.example.danieljezik.reader.Model.Article;
 import com.example.danieljezik.reader.Model.NewsResponse;
 import com.example.danieljezik.reader.Retrofit.ApiClient;
@@ -29,7 +31,8 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
     private ArticlesAdapter articlesAdapter;
     private List<Article> articleList;
     private RecyclerViewClickListener recyclerViewClickListener;
-    private DataBaseHelper database;
+    private TextView tvNoInternet;
+
 
     /**
      * Metoda onCreate, inicializuje prvky pri vytvoreni a vsetky potrebne veci
@@ -41,48 +44,60 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        database = new DataBaseHelper(this);
         recyclerViewClickListener = this;
+
+        tvNoInternet = (TextView) findViewById(R.id.tvNoInternet);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         EndpointInterface apiInterface = ApiClient.getClient().create(EndpointInterface.class);
 
-        /**
-         * Metoda vykona asynchronny call, z tela responsu ziska data, ktore spracuje na clanky a naplna nimi recyclerView
-         *
-         * @param call objekt volania call
-         * @param response odpoved (response)
-         */
-        Call<NewsResponse> newsResponse = apiInterface.getNewsData();
-        newsResponse.enqueue(new Callback<NewsResponse>() {
-            @Override
-            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
-                NewsResponse nr = response.body();
-                //response.headers().get("x-cached-result").equals("false")
-                articleList = nr.getArticles();
-                for (Article article: articleList)
-                {
-                    article.setPublishedAt(toDate(article.getPublishedAt()));
-                }
-
-                //articlesAdapter = new ArticlesAdapter(nr.getArticles(),);
-                articlesAdapter = new ArticlesAdapter(articleList, recyclerViewClickListener);
-                recyclerView.setAdapter(articlesAdapter);
-            }
+        if(isNetworkAvailable()) {
 
             /**
-             * Metoda pre chybu
+             * Metoda vykona asynchronny call, z tela responsu ziska data, ktore spracuje na clanky a naplna nimi recyclerView
              *
-             * @param call volanie
-             * @param t vynimka
+             * @param call objekt volania call
+             * @param response odpoved (response)
              */
-            @Override
-            public void onFailure(Call<NewsResponse> call, Throwable t) {
-                call.cancel();
-            }
-        });
+            Call<NewsResponse> newsResponse = apiInterface.getNewsData();
+            newsResponse.enqueue(new Callback<NewsResponse>() {
+                @Override
+                public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                    NewsResponse nr = response.body();
+                    //response.headers().get("x-cached-result").equals("false")
+                    articleList = nr.getArticles();
+                    for (Article article : articleList) {
+                        article.setPublishedAt(toDate(article.getPublishedAt()));
+                    }
+
+                    //articlesAdapter = new ArticlesAdapter(nr.getArticles(),);
+                    articlesAdapter = new ArticlesAdapter(articleList, recyclerViewClickListener);
+                    recyclerView.setAdapter(articlesAdapter);
+                }
+
+                /**
+                 * Metoda pre chybu
+                 *
+                 * @param call volanie
+                 * @param t    vynimka
+                 */
+                @Override
+                public void onFailure(Call<NewsResponse> call, Throwable t) {
+                    call.cancel();
+                }
+            });
+
+        } else {
+            tvNoInternet.setVisibility(View.VISIBLE);
+        }
+
     }
 
     /**
@@ -127,6 +142,28 @@ public class NewsActivity extends AppCompatActivity  implements RecyclerViewClic
             return e.toString();
         }
 
+    }
+
+    /**
+     * Metoda zistuje dostupnost internetu cez data a WiFi
+     *
+     * @return vracia boolean hodnotu dostupnosti internetu
+     */
+    private boolean isNetworkAvailable() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
 }

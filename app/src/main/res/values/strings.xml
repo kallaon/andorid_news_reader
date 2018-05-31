@@ -9,4 +9,5 @@
     <string name="toast_deleted">Príspevok bol vymazaný</string>
     <string name="toast_saved">Príspevok bol uložený</string>
     <string name="noInternetConnection">Žiadny prístup na internet</string>
+    <string name="noDbItems">Nemáte žiadne uložené príspevky</string>
 </resources>

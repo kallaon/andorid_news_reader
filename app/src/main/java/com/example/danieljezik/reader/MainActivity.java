@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,27 +25,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initSettings(isNetworkAvailable());
+        initSettings();
     }
 
     /**
      * Metoda volana pri obnoveni, nastavuje potrebne parametre aplikacie
-     * Podla dostupnosti internetu nastavuje buttony a logiku
      */
     @Override
     protected void onResume() {
         super.onResume();
-        initSettings(isNetworkAvailable());
+        initSettings();
     }
 
     /**
-     * Metoda nastavuje dostupnost buttonov, zobrazuje toasty, je vyuzivana onCreate a onResume
      * Po kliknuti na button - oblubene, presmeruje na offline clanky
      * Po kliknuti na button - novinky, presmeruje na zoznam noviniek
      *
-     * @param isNetworkAvailable vysledok z metody isNetworkAvailable
      */
-    private void initSettings(boolean isNetworkAvailable){
+    private void initSettings(){
         btnNovinky = findViewById(R.id.btn_novinky);
         btnUlozene = findViewById(R.id.btn_ulozene);
 
@@ -55,40 +53,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (isNetworkAvailable)
-        {
-            btnNovinky.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Intent novinky = new Intent(MainActivity.this, NewsActivity.class);
-                    MainActivity.this.startActivity(novinky);
-                }
-            });
-        } else {
-            btnNovinky.setEnabled(false);
-            Toast.makeText(getBaseContext(),getString(R.string.noInternetConnection),
-                    Toast.LENGTH_LONG).show();
-        }
+        btnNovinky.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent novinky = new Intent(MainActivity.this, NewsActivity.class);
+                MainActivity.this.startActivity(novinky);
+            }
+        });
+
     }
 
-    /**
-     * Metoda zistuje dostupnost internetu cez data a WiFi
-     *
-     * @return vracia boolean hodnotu dostupnosti internetu
-     */
-    private boolean isNetworkAvailable() {
-        boolean haveConnectedWifi = false;
-        boolean haveConnectedMobile = false;
-
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
-                    haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
-                    haveConnectedMobile = true;
-        }
-        return haveConnectedWifi || haveConnectedMobile;
-    }
 }
